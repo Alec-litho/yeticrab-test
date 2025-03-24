@@ -40,7 +40,7 @@ export function AttractionForm({ initialData, onSave, isOpen, setIsOpen }: IAttr
       rating: Number(formData.rating),
       lat: Number(formData.lat),
       lng: Number(formData.lng),
-      status: formData.status === Status.PLANNED ? Status.PLANNED : Status.VISITED,
+      status: formData.status
     });
   };
 
@@ -76,16 +76,18 @@ export function AttractionForm({ initialData, onSave, isOpen, setIsOpen }: IAttr
                 onUpdate={(value) => setFormData({ ...formData, rating: Number(value[0]) })}
                 options={[1, 2, 3, 4, 5].map((n) => ({ value: n.toString(), content: n.toString() }))}
               />
-
-              <Select
-                label="Status"
-                value={[`${formData.status}`]}
-                onUpdate={(value) => setFormData({ ...formData, status: Number(value[0]) })}
-                options={[
-                  { value: "planned", content: "Planned" },
-                  { value: "visited", content: "Visited" },
-                ]}
-              />
+              {/* if initialData is not null then this is editing modal and thus we can change status */}
+              { initialData &&
+                <Select
+                  label="Status"
+                  value={[`${formData.status}`]}
+                  onUpdate={(value) => setFormData({ ...formData, status: value[0] === "visited" ? Status.VISITED : Status.PLANNED })}
+                  options={[
+                    { value: "planned", content: "Planned" },
+                    { value: "visited", content: "Visited" },
+                  ]}
+                />
+              }
             </div>
 
             <div className="modal-actions">
@@ -97,9 +99,11 @@ export function AttractionForm({ initialData, onSave, isOpen, setIsOpen }: IAttr
               </Button>
             </div>
           </form>
+
           <div className="else">
             <p style={{ color: "gray" }}>Or use Yandex Maps</p>
           </div>
+
           <div className="ymap">
             <YandexMap setPlaceInfo={setPlaceInfo} lat={formData.lat!} lng={formData.lng!} />
           </div>

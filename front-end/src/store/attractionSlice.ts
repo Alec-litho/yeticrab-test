@@ -22,10 +22,12 @@ export const fetchAttractionsThunk = createAsyncThunk<Attraction[], void>("data/
 });
 
 export const createAttractionThunk = createAsyncThunk<Attraction, Omit<Attraction, "id" | "addedDate">>("data/createItem", async (attraction: Omit<Attraction, "id" | "addedDate">) => {
-  return await axios.post(URL, attraction);
+   const {data} =await axios.post(URL, attraction);
+   return data;
 });
 
 export const updateAttractionThunk = createAsyncThunk<Attraction,Attraction>("data/updateAttraction", async ({ id, ...attraction }) => {
+  console.log(attraction)
   const {data} = await axios.patch<Attraction>(`${URL}/${id}`, attraction);
   return data
 });
@@ -46,7 +48,7 @@ const attractionSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchAttractionsThunk.fulfilled, (state, action: PayloadAction<Attraction[]>) => {
-        state.attractions = action.payload;
+        state.attractions = action.payload
         state.isLoading = false;
       })
       .addCase(fetchAttractionsThunk.rejected, (state, action) => {
@@ -88,3 +90,4 @@ const attractionSlice = createSlice({
 });
 
 export default attractionSlice.reducer;
+

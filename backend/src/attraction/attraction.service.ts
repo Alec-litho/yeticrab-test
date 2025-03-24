@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateAttractionDto } from './dto/create-attraction.dto';
 import { UpdateAttractionDto } from './dto/update-attraction.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { Prisma } from '@prisma/client';
+import { Prisma, Status } from '@prisma/client';
 
 @Injectable()
 export class AttractionService {
@@ -27,6 +27,7 @@ export class AttractionService {
   async update(id: number, updateAttractionDto: UpdateAttractionDto) {
     try {
       let attractionInputData = this.createAttractionInput(updateAttractionDto);
+      console.log(updateAttractionDto)
       const attraction = await this.prisma.attraction.update({
         where: { id },
         data: attractionInputData,
@@ -49,6 +50,7 @@ export class AttractionService {
   }
 
   createAttractionInput(data: Prisma.AttractionCreateInput) {
+    console.log(data)
     return {
       name: data.name,
       description: data.description,
@@ -57,6 +59,7 @@ export class AttractionService {
       location: data.location,
       lat: data.lat,
       lng: data.lng,
+      status: data.status? data.status : Status.PLANNED,
       addedDate: data.addedDate ? data.addedDate : new Date().toISOString(),
     };
   }

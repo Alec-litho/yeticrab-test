@@ -1,0 +1,44 @@
+/* controls-container.css */
+.controls-container {
+    margin: 20px 0;
+    padding: 16px;
+    background: var(--g-color-base-background);
+    border-radius: var(--g-border-radius-m);
+    box-shadow: var(--g-color-layer-shadow);
+  }
+  
+  .controls-row {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 16px;
+    align-items: center;
+  }
+  
+  .search-input {
+    min-width: 300px;
+  }
+  
+  .sort-select {
+    width: 200px;
+  }
+  
+  .hide-switch {
+    white-space: nowrap;
+  }
+  
+  .empty-state {
+    padding: 40px;
+    text-align: center;
+    color: var(--g-color-text-secondary);
+  }
+  
+  @media (max-width: 768px) {
+    .controls-row {
+      grid-template-columns: 1fr;
+    }
+    
+    .search-input,
+    .sort-select {
+      width: 100%;
+    }
+  }

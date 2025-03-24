@@ -4,6 +4,7 @@ import { CreateAttractionDto } from './dto/create-attraction.dto';
 import { UpdateAttractionDto } from './dto/update-attraction.dto';
 import { ApiResponse } from '@nestjs/swagger';
 import { Attraction } from './entities/attraction.entity';
+import { Status } from '@prisma/client';
 
 @Controller('attraction')
 export class AttractionController {
@@ -46,7 +47,8 @@ export class AttractionController {
   })
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateAttractionDto: UpdateAttractionDto) {
-    return this.attractionService.update(+id, updateAttractionDto);
+    const formed =  {...updateAttractionDto, status: updateAttractionDto.status === 1? Status.VISITED : Status.PLANNED}
+    return this.attractionService.update(+id, formed);
   }
   @ApiResponse({
     status: HttpStatus.OK,

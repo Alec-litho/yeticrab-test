@@ -1,6 +1,5 @@
-// hooks/useAttractionsFilters.ts
 import { useState, useMemo, useCallback } from 'react'
-import { Attraction, Status } from '../types'
+import { Attraction, Status } from '../types.d'
 
 export const useAttractionsFilters = (initialData: Attraction[]) => {
   const [searchQuery, setSearchQuery] = useState('')
@@ -21,7 +20,7 @@ export const useAttractionsFilters = (initialData: Attraction[]) => {
 
     // Фильтрация по статусу
     if (hideViewed) {
-      result = result.filter(item => item.status !== Status.VISITED)
+      result = result.filter(item => item.status !== "VISITED")
     }
 
     // Сортировка
@@ -34,14 +33,6 @@ export const useAttractionsFilters = (initialData: Attraction[]) => {
         return [...result].sort((a, b) => a.rating - b.rating)
       case 'rating_desc':
         return [...result].sort((a, b) => b.rating - a.rating)
-      case 'date_asc':
-        return [...result].sort((a, b) => 
-          new Date(a.addedDate).getTime() - new Date(b.addedDate).getTime()
-        )
-      case 'date_desc':
-        return [...result].sort((a, b) => 
-          new Date(b.addedDate).getTime() - new Date(a.addedDate).getTime()
-        )
       default:
         return result
     }

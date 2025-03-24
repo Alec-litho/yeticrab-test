@@ -7,7 +7,7 @@ export interface Attraction {
   location: string;
   lat: number;
   lng: number;
-  status: Status;
+  status: Status | String;
   addedDate: Date
 }
 interface placeData {

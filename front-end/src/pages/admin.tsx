@@ -1,11 +1,10 @@
 import { AttractionForm } from "../components/AttractionForm";
 import { EditableTable } from "../components/EditableTable";
-import { Attraction, Status } from "../types.d";
-import "../styles/admin.css"
-import { useAppDispatch, useAppSelector } from "../hooks/hooks";
+import { Attraction } from "../types.d";
 import { RootState } from "../store";
 import { createAttractionThunk, deleteAttractionThunk, fetchAttractionsThunk, updateAttractionThunk } from "../store/attractionSlice";
 import { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 
 export const AdminPage = () => {
   const attractions = useAppSelector((state:RootState) => state.attractions)
@@ -26,7 +25,7 @@ export const AdminPage = () => {
     }
     const handleSave = (data:any) => {
       if(currMode === "CREATE") {
-        dispatch(createAttractionThunk(data))
+        dispatch(createAttractionThunk({...data, status:null}))
       } else {
         dispatch(updateAttractionThunk(data as Attraction))
       }

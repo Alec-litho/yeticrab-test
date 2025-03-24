@@ -15,6 +15,7 @@ export const columns = [
 export function AttractionsTable({ data, showMap }: { data: Attraction[], showMap: (lat:number, lng:number) => void }) {
 
   const rows = data.map((attraction) => ({
+    
     photo: (
       <img 
         src={attraction.photoUrl || "https://i.ibb.co/BF95xfN/image.png"} 
@@ -36,8 +37,8 @@ export function AttractionsTable({ data, showMap }: { data: Attraction[], showMa
     ),
     location: attraction.location,
     status: (
-      <Text color={attraction.status === Status.VISITED ? 'primary' : 'warning'}>
-        {attraction.status === Status.VISITED ? 'visited' : 'planned'}
+      <Text color={attraction.status === "VISITED"? 'primary' : 'warning'}>
+        {attraction.status ===  "VISITED"? 'visited' : 'planned'}
       </Text>
     ),
     map: (

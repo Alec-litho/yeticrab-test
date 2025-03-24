@@ -71,7 +71,7 @@ export default function YandexMap({ setPlaceInfo, lat, lng}: IYandexMap) {
   };
 
   return (
-    <div className="map-container" style={{ width: "100%", height: "100%" }}>
+    <div className="map-container" >
       <div ref={mapRef} style={{ width: "100%", height: "500px" }} />
     </div>
   );
