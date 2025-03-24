@@ -19,7 +19,7 @@ npm run start
 $ npm i
 
 # run migration and seeding
-$ npx prisma migrate up
+$ npx prisma migrate dev
 
 # run server
 $ npm run start:dev
