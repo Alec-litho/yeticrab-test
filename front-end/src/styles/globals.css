@@ -1,0 +1,106 @@
+
+.attraction-form {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.form-actions {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+/* AttractionTable */
+.attractions-table {
+  margin: 2rem 0;
+  overflow-x: auto;
+}
+
+.attraction-photo {
+  width: 120px;
+  height: 80px;
+  object-fit: cover;
+}
+
+.rating-stars {
+  color: var(--g-color-text-warning);
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  font-family: monospace;
+}
+
+/* Counter */
+.counter {
+  text-align: center;
+  padding: 1.5rem;
+  background: var(--g-color-base-brand);
+  color: var(--g-color-text-light-primary);
+  border-radius: var(--g-border-radius-l);
+  margin-bottom: 2rem;
+}
+
+.counter [data-qa='counter-value'] {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+/* Toggle */
+.toggle-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+  background: var(--g-color-base-float);
+  border-radius: var(--g-border-radius-m);
+}
+
+/* EditableTable */
+.table-actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.editable-table .gravity-ui-table__td {
+  vertical-align: middle;
+}
+
+
+.gravity-ui-text-input,
+.gravity-ui-select,
+.gravity-ui-text-area {
+  width: 100%;
+}
+
+.gravity-ui-table__table {
+  --g-table-cell-padding: 12px 16px;
+  --g-table-header-color: var(--g-color-text-primary);
+  font-size: 0.9rem;
+}
+
+.gravity-ui-table__th {
+  background: var(--g-color-base-float-hover);
+}
+
+.gravity-ui-table__tr:hover {
+  background: var(--g-color-base-simple-hover);
+}
+
+.admin, .home {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
