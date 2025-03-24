@@ -17,7 +17,7 @@ export default function HomePage() {
     "lat": 55.754093,
     "lng": 37.474093,
     "status": Status.PLANNED
-  }
+  } 
 ]);
   const [hideVisited, setHideVisited] = useState(false);
 
