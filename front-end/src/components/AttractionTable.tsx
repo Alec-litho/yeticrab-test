@@ -1,31 +1,32 @@
 import { Table, Text, Icon, Button } from '@gravity-ui/uikit';
 import { MapPin } from '@gravity-ui/icons';
 import { Attraction, Status } from '../types.d';
+import cutDescription from '../helpers/cutDescription';
 
 
 export const columns = [
-    { id: 'photo', name: 'Photo', width: 120 },
-    { id: 'name', name: 'Name' },
-    { id: 'rating', name: 'Rating', width: 120 },
-    { id: 'location', name: 'Location' },
-    { id: 'status', name: 'Status', width: 120 },
-    { id: 'map', name: 'Map', width: 120 },
+    { id: 'photo', name: 'Photo', width: 100 },
+    { id: 'name', name: 'Name', width: 100 },
+    { id: 'rating', name: 'Rating', width: 100 },
+    { id: 'location', name: 'Location', width: 100 },
+    { id: 'status', name: 'Status', width: 100 },
+    { id: 'map', name: 'Map', width: 100 },
   ];
-export function AttractionsTable({ data }: { data: Attraction[] }) {
+export function AttractionsTable({ data, showMap }: { data: Attraction[], showMap: (lat:number, lng:number) => void }) {
 
   const rows = data.map((attraction) => ({
     photo: (
       <img 
-        src={attraction.photoUrl} 
+        src={attraction.photoUrl || "https://i.ibb.co/BF95xfN/image.png"} 
         alt={attraction.name} 
         className="attraction-photo"
-        style={{ width: 100, height: 60, objectFit: 'cover' }}
+        style={{ width: 100, height: "auto", objectFit: 'cover' }}
       />
     ),
     name: (
       <div>
         <Text variant="header-1">{attraction.name}</Text>
-        <Text color="secondary">{attraction.description}</Text>
+        <Text color="secondary">{cutDescription(attraction.description || "", 100)}</Text>
       </div>
     ),
     rating: (
@@ -36,12 +37,12 @@ export function AttractionsTable({ data }: { data: Attraction[] }) {
     location: attraction.location,
     status: (
       <Text color={attraction.status === Status.VISITED ? 'primary' : 'warning'}>
-        {attraction.status}
+        {attraction.status === Status.VISITED ? 'visited' : 'planned'}
       </Text>
     ),
     map: (
       <Button 
-        href={attraction.photoUrl} 
+        onClick={() => showMap(attraction.lat, attraction.lng)} 
         target="_blank"
         view="outlined"
       >
@@ -57,6 +58,7 @@ export function AttractionsTable({ data }: { data: Attraction[] }) {
       data={rows}
       edgePadding={true}
       verticalAlign="middle"
+      
     />
   );
 }
