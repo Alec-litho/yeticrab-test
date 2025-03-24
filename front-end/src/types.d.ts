@@ -10,7 +10,13 @@ export interface Attraction {
   status: Status;
   addedDate: Date
 }
-
+interface placeData {
+  name:string;
+  location:string;
+  lat:number;
+  lng:number;
+  map:string;
+}
 export enum Status {
     PLANNED,
     VISITED

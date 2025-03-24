@@ -1,18 +1,22 @@
 
 .attraction-form {
-  max-width: 800px;
-  margin: 2rem auto;
-  padding: 1.5rem;
-
+  width: 80%;
+  padding: 1rem 1rem 0 1rem;
+  margin: 1rem 0;
 }
 
 .form-row {
   display: grid;
+  width: 100%;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1rem;
-  margin: 1rem 0;
 }
-
+.form-selectors {
+  margin-top: 15px;
+  display: flex;
+  justify-content: flex-start;
+  gap: 20px;
+}
 .form-actions {
   margin-top: 2rem;
   display: flex;
@@ -103,4 +107,43 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-top: 50px;
+}
+
+.main-nav {
+  position: sticky;
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background: var(--g-color-base-brand);
+}
+.nav-link {
+  color: var(--g-color-text-light-primary);
+  font-weight: 500;
+  font-size: 16px;
+  transform: .2s;
+}
+.nav-link:hover {
+  color: var(--g-color-text-light-secondary);
+}
+.modal-actions {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.ymap {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
 }

@@ -2,36 +2,42 @@ import { AttractionForm } from "../components/AttractionForm";
 import { EditableTable } from "../components/EditableTable";
 import { Attraction, Status } from "../types.d";
 import "../styles/admin.css"
+import { useAppDispatch, useAppSelector } from "../hooks/hooks";
+import { RootState } from "../store";
+import { createAttractionThunk, deleteAttractionThunk, fetchAttractionsThunk, updateAttractionThunk } from "../store/attractionSlice";
+import { useEffect, useState } from "react";
 
 export const AdminPage = () => {
-    // const { data, mutate } = useSWR('/api/attractions');
-    const data: Attraction[] = [{
-        "id": 1,
-        "name": "Red Square",
-        "description": "Red Square is one of the oldest and largest squares in Moscow, Russia. It is located in Moscow's historic centre, along the eastern walls of the Kremlin",
-        "addedDate": new Date(),
-        "rating": 2.5,
-        "photoUrl": "https://i.ibb.co/wMkFry0/ff.jpg",
-        "location": "Moscow, Russia",
-        "lat": 55.754093,
-        "lng": 37.474093,
-        "status": Status.PLANNED
-      }
-    ]
+  const attractions = useAppSelector((state:RootState) => state.attractions)
+  const dispatch = useAppDispatch()
+  let [isOpen, setIsOpen] = useState(false)
+  let [currMode, setCurrMode] = useState("CREATE")
+  let [currAttraction, setCurrAttraction] = useState<null | Partial<Attraction>>(null)
+  useEffect(() => {
+    !attractions || dispatch(fetchAttractionsThunk())
+  },[])
     const handleDelete = (id: number) => {
-    //   fetch(`/api/attractions/${id}`, { method: 'DELETE' })
-    //     .then(() => mutate());
-    console.log(`handle delete attraction: ${id}`)
+      dispatch(deleteAttractionThunk(id))
     };
-    const handleEdit = () => {
-        console.log("edited")
+    const handleEdit = (attraction: Attraction) => {
+      setIsOpen(true)
+      setCurrMode("EDIT")
+      setCurrAttraction(prev => prev = attraction)
+    }
+    const handleSave = (data:any) => {
+      if(currMode === "CREATE") {
+        dispatch(createAttractionThunk(data))
+      } else {
+        dispatch(updateAttractionThunk(data as Attraction))
+      }
+      setIsOpen(false)
     }
   
     return (
       <div className="admin">
-        <AttractionForm onSave={() => console.log("mutate")} />
+        <AttractionForm onSave={handleSave} isOpen={isOpen} setIsOpen={setIsOpen} initialData={currAttraction}/>
         <EditableTable
-          data={data}
+          data={attractions}
           onEdit={handleEdit}
           onDelete={handleDelete}
         />
