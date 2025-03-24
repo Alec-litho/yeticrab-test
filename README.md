@@ -27,7 +27,7 @@ $ npm run start:dev
 
 # API
 
-- swagger: http://localhost:3001-/api
+- swagger: http://localhost:3001/api
 
 # .env variables:
 
