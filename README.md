@@ -37,3 +37,7 @@ $ npm run start:dev
 - POSTGRES_PORT='5432'
 - POSTGRES_DATABASE='test'
 - DATABASE_URL = postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DATABASE}
+
+# Note
+
+- Вы можете кликнуть по карте, чтобы данные точки были отображены в полях
